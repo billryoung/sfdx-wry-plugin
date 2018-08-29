@@ -16,6 +16,7 @@ Utilities for SFDX JSON data files
 * [Debugging your plugin](#debugging-your-plugin)
 <!-- tocstop -->
 <!-- install -->
+sfdx plugins:install sfdx-wry-plugin
 <!-- usage -->
 ```sh-session
 $ npm install -g sfdx-wry-plugin
