@@ -1,7 +1,7 @@
 {
-  "commandDescription": "Prints a greeting and your org id(s)!",
-  "nameFlagDescription": "name to print",
-  "forceFlagDescription": "example boolean flag",
-  "inputdirDescription": "example input directory",
+  "commandDescription": "Replaces RecordType and UserRole references with Id values",
+  "forceFlagDescription": "Force overwrite output directory (not supported yet)",
+  "inputdirDescription": "Directory containing JSON data files",
+  "outputdirDescription": "Target directory for new versions of data files (default: $inputdir.out)",
   "errorNoOrgResults": "No results found for the organization '%s'."
 }

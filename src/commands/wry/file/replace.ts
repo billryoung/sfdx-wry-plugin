@@ -13,12 +13,19 @@ export default class Replace extends SfdxCommand {
     public static description = messages.getMessage('commandDescription');
 
     public static examples = [
-  `$ sfdx hello:org --targetusername myOrg@example.com --targetdevhubusername devhub@org.com
-  Hello world! This is org: MyOrg and I will be around until Tue Mar 20 2018!
-  My hub org id is: 00Dxx000000001234
+  `$ sfdx wry:file:replace --targetusername myScratchOrg@example.com --inputdir dataFiles --outputdir dataFiles.replaced  
+  Copying dataFiles/* to dataFiles.replaced/*
+  Account.json: Replacing $R{RecordType.Account.Vendor} with 0125C000000IGVIQA4
+  Account.json: Replacing $R{RecordType.Account.Customer} with 0125C000000IGVSQA4
+  NewUser.json: Replacing $R{UserRole.CEO} with 00E5C000000UZSmUAO
+  QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
   `,
-  `$ sfdx hello:org --name myname --targetusername myOrg@example.com
-  Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
+`$ sfdx wry:file:replace -u myScratchOrg@example.com -i data  
+  Copying data/* to data.out/*
+  Account.json: Replacing $R{RecordType.Account.Vendor} with 0125C000000IGVIQA4
+  Account.json: Replacing $R{RecordType.Account.Customer} with 0125C000000IGVSQA4
+  NewUser.json: Replacing $R{UserRole.CEO} with 00E5C000000UZSmUAO
+  QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO  
   `
   ];
 
@@ -28,7 +35,7 @@ export default class Replace extends SfdxCommand {
         // flag with a value (-n, --name=VALUE)
         force: flags.boolean({char: 'f', description: messages.getMessage('forceFlagDescription')}),
         inputdir: flags.string({char: 'i', description: messages.getMessage('inputdirDescription')}),
-        outputdir: flags.string({char: 'o', description: messages.getMessage('inputdirDescription')})
+        outputdir: flags.string({char: 'o', description: messages.getMessage('outputdirDescription')})
     };
 
 
@@ -39,10 +46,10 @@ export default class Replace extends SfdxCommand {
 
     
     public async run(): Promise<core.AnyJson> {
-
+ 
         //get command line flags
         const inputdirArg = this.flags.inputdir;
-        const outputdirArg = this.flags.outputdir;
+        const outputdirArg = this.flags.outputdir  || inputdirArg+'.out';
         //TODO this.flags.force
         
         // this.org is guaranteed because requiresUsername=true, as opposed to supportsUsername
