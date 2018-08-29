@@ -42,16 +42,16 @@ USAGE
 
 # Commands
 <!-- commands -->
-* [`sfdx-wry-plugin wry:file:replace [FILE]`](#sfdx-wry-plugin-wryfilereplace-file)
+* [`sfdx-wry-plugin wry:file:replace`](#sfdx-wry-plugin-wryfilereplace)
 * [`sfdx-wry-plugin wry:hello:org [FILE]`](#sfdx-wry-plugin-wryhelloorg-file)
 
-## `sfdx-wry-plugin wry:file:replace [FILE]`
+## `sfdx-wry-plugin wry:file:replace`
 
 Replaces RecordType and UserRole references with Id values
 
 ```
 USAGE
-  $ sfdx-wry-plugin wry:file:replace [FILE]
+  $ sfdx-wry-plugin wry:file:replace
 
 OPTIONS
   -f, --force                                     Force overwrite output directory (not supported yet)

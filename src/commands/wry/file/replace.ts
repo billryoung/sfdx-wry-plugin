@@ -29,7 +29,7 @@ export default class Replace extends SfdxCommand {
   `
   ];
 
-    public static args = [{name: 'file'}];
+    public static args = [];
 
     protected static flagsConfig = {
         // flag with a value (-n, --name=VALUE)
@@ -86,6 +86,8 @@ export default class Replace extends SfdxCommand {
 
                 const oldFilePath = inputdir+"/"+filename;
                 const newFilePath = outputdir+"/"+filename;
+                //const oldFilePath = url.resolve(inputdir, filename);
+                //const newFilePath = url.resolve(outputdir, filename);
         
                 const oldFileStats = fs.statSync(oldFilePath);
         
