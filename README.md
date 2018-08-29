@@ -4,10 +4,8 @@ sfdx-wry-plugin
 Utilities for SFDX JSON data files
 
 [![Version](https://img.shields.io/npm/v/sfdx-wry-plugin.svg)](https://npmjs.org/package/sfdx-wry-plugin)
-<!-- [![CircleCI](https://circleci.com/gh/billryoung/sfdx-wry-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/billryoung/sfdx-wry-plugin/tree/master) -->
 [![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/billryoung/sfdx-wry-plugin?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/sfdx-wry-plugin/branch/master)
 [![Codecov](https://codecov.io/gh/billryoung/sfdx-wry-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/billryoung/sfdx-wry-plugin)
-<!-- [![Greenkeeper](https://badges.greenkeeper.io/billryoung/sfdx-wry-plugin.svg)](https://greenkeeper.io/) -->
 [![Known Vulnerabilities](https://snyk.io/test/github/billryoung/sfdx-wry-plugin/badge.svg)](https://snyk.io/test/github/billryoung/sfdx-wry-plugin)
 [![Downloads/week](https://img.shields.io/npm/dw/sfdx-wry-plugin.svg)](https://npmjs.org/package/sfdx-wry-plugin)
 [![License](https://img.shields.io/npm/l/sfdx-wry-plugin.svg)](https://github.com/billryoung/sfdx-wry-plugin/blob/master/package.json)
