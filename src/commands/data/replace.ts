@@ -53,7 +53,7 @@ export default class Replace extends SfdxCommand {
     
         //query record types
         const recordTypeQuery = 'Select Id, SobjectType, DeveloperName from RecordType where IsActive=true order by SObjectType, DeveloperName';
-        const recordTypeResult = await conn.query<Organization>(recordTypeQuery);
+        const recordTypeResult = await conn.query<RecordType>(recordTypeQuery);
         for(let entry of recordTypeResult.records) {
             const key = "RecordType."+entry.SobjectType+"."+entry.DeveloperName;
             replaceMap[key] = entry.Id;
@@ -62,7 +62,7 @@ export default class Replace extends SfdxCommand {
       
         //query Roles
         const userRoleQuery = 'select Id, DeveloperName from UserRole order by DeveloperName';
-        const userRoleResult = await conn.query<Organization>(userRoleQuery);
+        const userRoleResult = await conn.query<UserRole>(userRoleQuery);
         for(let entry of userRoleResult.records) {
             const key = "Role."+entry.DeveloperName;  
             replaceMap[key] = entry.Id;
