@@ -23,8 +23,17 @@ sfdx plugins:install sfdx-wry-plugin
 
 # Docs
 <!-- docs -->
-Replaces symbolic references in JSON Files to scratch org specific ID values.  It does this for both RecordType and UserRole values.  
+Allows you to use Record Type developer names in JSON files for sfdx's data:tree:import.
 
+The intent is that you first run tool on your JSON data files.  It creates a copy with scratch org specific ID values put in place.  Then you run data:tree:import against that output copy.
+
+Within your JSON files, Record Types can be referenced in one of two ways:
+First way, you can use a syntax of $R{RecordType.SobjectType.DeveloperName} such as $R{RecordType.Account.Vendor}
+This is a very concise way, good for adding in to pre-existing or manually maintained JSON data files.
+
+Second way, in the data:tree:export command include "RecordType.DeveloperName" in the select fields along with other fields, such as "select Name, BillingState, RecordType.DeveloperName from Account".  This leaves you with a very verbose RecordType reference in the JSON file, but one that this tool can recognize and replace.
+
+ 
 # Usage
 <!-- usage -->
 ```sh-session
@@ -32,7 +41,7 @@ $ npm install -g sfdx-wry-plugin
 $ sfdx-wry-plugin COMMAND
 running command...
 $ sfdx-wry-plugin (-v|--version|version)
-sfdx-wry-plugin/0.0.3 linux-x64 node-v8.10.0
+sfdx-wry-plugin/0.0.4 linux-x64 node-v8.10.0
 $ sfdx-wry-plugin --help [COMMAND]
 USAGE
   $ sfdx-wry-plugin COMMAND
@@ -85,7 +94,7 @@ EXAMPLES
      QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
 ```
 
-_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.3/src/commands/wry/file/replace.ts)_
+_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.4/src/commands/wry/file/replace.ts)_
 
 ## `sfdx-wry-plugin wry:hello:org [FILE]`
 
@@ -113,5 +122,5 @@ EXAMPLES
      Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
 ```
 
-_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.3/src/commands/wry/hello/org.ts)_
+_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.4/src/commands/wry/hello/org.ts)_
 <!-- commandsstop -->

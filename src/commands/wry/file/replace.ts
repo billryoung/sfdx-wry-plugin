@@ -95,17 +95,41 @@ export default class Replace extends SfdxCommand {
                 if(oldFileStats.isDirectory()) {
                     processdir(oldFilePath, newFilePath);
                 }
-                else if(filename.endsWith(".json") || filename.endsWith(".csv")) {
-
+                //else if(filename.endsWith(".json") || filename.endsWith(".csv")) {
+                else if(filename.endsWith(".json")) {
+                    console.log("Processing:\t"+oldFilePath+"\tto\t"+newFilePath);
+                    
                     fs.readFile(oldFilePath, 'utf8', (err,data) => {
                         if (err) { throw err; }
 
-                        const newData = data.replace(/\$R{(.*)}/g, function(x,y) {
+                        let objectType = null;
+                        let ignoreResult1 = data.replace(/"records"[\s\S]*?attributes[\s\S]*?"type"[\s\S]*?"(.*)"/gm, function(x,y) {
+                        //newData = data.replace(/"attributes".?{"type".?:.?"(.?)".?"RecordType"\\: {.?{.?}.?"DeveloperName".?"(.?)"}/gm, function(x,y,z) {
+                            //console.log("objectType:\ty='"+y+"'");
+                            objectType = y;
+                            return y;
+                        });
+                        if(null!=objectType) {
+                            console.log(oldFilePath+": sObjectType=\""+objectType+"\"");
+                        }
+                        
+                        let newData = data.replace(/\$R{(.*)}/g, function(x,y) {
                             const newValue = replaceMap[y];
-                            console.log("replace:\t"+x+"\t'"+y+"'\t"+newValue);
+                            console.log(oldFilePath+": replace:R: \""+y+"\": "+newValue);
                             return newValue;
                         });
-                
+                        
+                        if(null!=objectType) {
+                            newData = newData.replace(/"RecordType"[\s\S]*?attributes[\s\S]*?"type"[\s\S]*?"DeveloperName"[\s\S]*?:[\s\S]*?"(.*)"[\s\S]*?}/gm, function(x,y) {
+                                const replaceKey = "RecordType."+objectType+"."+y;
+                                const recordTypeId = replaceMap[replaceKey];
+                                const newValue = "\"RecordTypeId\": \""+recordTypeId+"\"";
+                                //console.log("replace2: x='"+x+" y='"+y+"' "+newValue);
+                                console.log(oldFilePath+": replace:RTDN: \""+replaceKey+"\": "+recordTypeId);
+                            
+                                return newValue;
+                            });
+                        }
                 
                         fs.open(newFilePath, 'wx', (err, fd) => {
                             if (err) {
@@ -117,16 +141,17 @@ export default class Replace extends SfdxCommand {
                     
                             fs.writeFile(newFilePath, newData, 'utf8', (err) => {
                                 if (err) { throw err; }
-                                console.log("Processed:\t"+oldFilePath+"\tto\t"+newFilePath);
+                                //console.log("Processed: "+oldFilePath+"\tto\t"+newFilePath);
                             }); //writeFile
                         }); //open for write
                    }); //readFile
                 } //if ends with JSON
                 else {
-            
+                    console.log("Copying: "+oldFilePath+" to "+newFilePath);
+                    
                     fs.copyFile(oldFilePath, newFilePath, fs.constants.COPYFILE_EXCL, (err) => {
                         if (err) { throw err; }
-                        console.log("Copied:\t"+oldFilePath+"\tto\t"+newFilePath);
+                        //console.log("Copied:\t"+oldFilePath+"\tto\t"+newFilePath);
                     });
                 } //end if/else on type of file processing
             } //for loop of filenames
