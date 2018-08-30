@@ -1,7 +1,7 @@
 {
   "name": "sfdx-wry-plugin",
   "description": "Utilities for SFDX JSON data files",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "William R. Young",
   "bugs": "https://github.com/billryoung/sfdx-wry-plugin/issues",
   "dependencies": {
@@ -58,6 +58,7 @@
         "description": "Commands to say hello."
       }
     },
+    "bin": "sfdx",
     "devPlugins": [
       "@oclif/plugin-help"
     ]

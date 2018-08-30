@@ -38,29 +38,29 @@ Second way, in the data:tree:export command include "RecordType.DeveloperName" i
 <!-- usage -->
 ```sh-session
 $ npm install -g sfdx-wry-plugin
-$ sfdx-wry-plugin COMMAND
+$ sfdx COMMAND
 running command...
-$ sfdx-wry-plugin (-v|--version|version)
-sfdx-wry-plugin/0.0.4 linux-x64 node-v8.10.0
-$ sfdx-wry-plugin --help [COMMAND]
+$ sfdx (-v|--version|version)
+sfdx-wry-plugin/0.0.5 linux-x64 node-v8.10.0
+$ sfdx --help [COMMAND]
 USAGE
-  $ sfdx-wry-plugin COMMAND
+  $ sfdx COMMAND
 ...
 ```
 <!-- usagestop -->
 
 # Commands
 <!-- commands -->
-* [`sfdx-wry-plugin wry:file:replace`](#sfdx-wry-plugin-wryfilereplace)
-* [`sfdx-wry-plugin wry:hello:org [FILE]`](#sfdx-wry-plugin-wryhelloorg-file)
+* [`sfdx wry:file:replace`](#sfdx-wryfilereplace)
+* [`sfdx wry:hello:org [FILE]`](#sfdx-wryhelloorg-file)
 
-## `sfdx-wry-plugin wry:file:replace`
+## `sfdx wry:file:replace`
 
 Replaces RecordType and UserRole references with Id values
 
 ```
 USAGE
-  $ sfdx-wry-plugin wry:file:replace
+  $ sfdx wry:file:replace
 
 OPTIONS
   -f, --force                                     Force overwrite output directory (not supported yet)
@@ -94,15 +94,15 @@ EXAMPLES
      QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
 ```
 
-_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.4/src/commands/wry/file/replace.ts)_
+_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.5/src/commands/wry/file/replace.ts)_
 
-## `sfdx-wry-plugin wry:hello:org [FILE]`
+## `sfdx wry:hello:org [FILE]`
 
 Prints a greeting and your org id(s)!
 
 ```
 USAGE
-  $ sfdx-wry-plugin wry:hello:org [FILE]
+  $ sfdx wry:hello:org [FILE]
 
 OPTIONS
   -f, --force                                      example boolean flag
@@ -122,5 +122,5 @@ EXAMPLES
      Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
 ```
 
-_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.4/src/commands/wry/hello/org.ts)_
+_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.5/src/commands/wry/hello/org.ts)_
 <!-- commandsstop -->
