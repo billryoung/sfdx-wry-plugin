@@ -34,20 +34,6 @@ This is a very concise way, good for adding in to pre-existing or manually maint
 Second way, in the data:tree:export command include "RecordType.DeveloperName" in the select fields along with other fields, such as "select Name, BillingState, RecordType.DeveloperName from Account".  This leaves you with a very verbose RecordType reference in the JSON file, but one that this tool can recognize and replace.
 
  
-# Usage
-<!-- usage -->
-```sh-session
-$ npm install -g sfdx-wry-plugin
-$ sfdx COMMAND
-running command...
-$ sfdx (-v|--version|version)
-sfdx-wry-plugin/0.0.5 linux-x64 node-v8.10.0
-$ sfdx --help [COMMAND]
-USAGE
-  $ sfdx COMMAND
-...
-```
-<!-- usagestop -->
 
 # Commands
 <!-- commands -->
