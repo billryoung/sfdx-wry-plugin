@@ -13,7 +13,6 @@ Utilities for SFDX JSON data files
 <!-- toc -->
 * [Install](#install)
 * [Docs](#docs)
-* [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
 
@@ -80,7 +79,7 @@ EXAMPLES
      QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
 ```
 
-_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.5/src/commands/wry/file/replace.ts)_
+_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.6/src/commands/wry/file/replace.ts)_
 
 ## `sfdx wry:hello:org [FILE]`
 
@@ -108,5 +107,5 @@ EXAMPLES
      Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
 ```
 
-_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.5/src/commands/wry/hello/org.ts)_
+_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.6/src/commands/wry/hello/org.ts)_
 <!-- commandsstop -->
