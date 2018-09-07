@@ -36,8 +36,48 @@ Second way, in the data:tree:export command include "RecordType.DeveloperName" i
 
 # Commands
 <!-- commands -->
+* [`sfdx wry:data:count`](#sfdx-wrydatacount)
 * [`sfdx wry:file:replace`](#sfdx-wryfilereplace)
 * [`sfdx wry:hello:org [FILE]`](#sfdx-wryhelloorg-file)
+* [`sfdx wry:org:limits`](#sfdx-wryorglimits)
+
+## `sfdx wry:data:count`
+
+Replaces RecordType and UserRole references with Id values
+
+```
+USAGE
+  $ sfdx wry:data:count
+
+OPTIONS
+  -o, --objects=objects                           List of objects to check (CSV seperated for multiple) (defaults to
+                                                  ALL)
+
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+
+  --json                                          format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLES
+  $ sfdx wry:data:count --targetusername myScratchOrg@example.com -o Account,Opportunity,User
+  Account: 14 records
+  Account.Vendor: 2 records
+  Account.Customer: 12 records
+  Opportunity: 38 records
+  User: 5 records
+  
+  $ sfdx wry:file:replace -u myScratchOrg@example.com -o ALL
+  Account: 14 records
+  Account.Vendor: 2 records
+  Account.Customer: 12 records
+  Opportunity: 38 records
+  User: 5 records
+```
+
+_See code: [src/commands/wry/data/count.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.7/src/commands/wry/data/count.ts)_
 
 ## `sfdx wry:file:replace`
 
@@ -79,7 +119,7 @@ EXAMPLES
      QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
 ```
 
-_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.6/src/commands/wry/file/replace.ts)_
+_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.7/src/commands/wry/file/replace.ts)_
 
 ## `sfdx wry:hello:org [FILE]`
 
@@ -107,5 +147,36 @@ EXAMPLES
      Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
 ```
 
-_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.6/src/commands/wry/hello/org.ts)_
+_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.7/src/commands/wry/hello/org.ts)_
+
+## `sfdx wry:org:limits`
+
+Replaces RecordType and UserRole references with Id values
+
+```
+USAGE
+  $ sfdx wry:org:limits
+
+OPTIONS
+  -l, --limits=limits                             List of limits to check (CSV seperated for multiple) (defaults to ALL)
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLES
+  $ sfdx wry:org:limits --targetusername myScratchOrg@example.com
+  ConcurrentAsyncGetReportInstances: 200 of 200
+  ConcurrentSyncReportRuns: 20 of 20
+  DailyAnalyticsDataflowJobExecutions: 40 of 40
+  DailyApiRequests: 14419 of 15000
+  ...
+
+  $ sfdx wry:org:limits -u myScratchOrg@example.com -l MassEmail,DailyApiRequests,SingleEmail
+  MassEmail: 10 of 10
+  DailyApiRequests: 14408 of 15000
+  SingleEmail: 15 of 15
+```
+
+_See code: [src/commands/wry/org/limits.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.7/src/commands/wry/org/limits.ts)_
 <!-- commandsstop -->
