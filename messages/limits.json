@@ -1,0 +1,6 @@
+{
+  "commandDescription": "Reports limits in a Salesforce instance",
+  "forceFlagDescription": "Force overwrite output directory (not supported yet)",
+  "limitsDescription": "List of limits to check (CSV seperated for multiple) (defaults to ALL)",
+  "errorNoOrgResults": "No results found for the organization '%s'."
+}

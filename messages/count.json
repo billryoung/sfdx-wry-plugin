@@ -1,0 +1,6 @@
+{
+  "commandDescription": "Counts rows in data objects",
+  "forceFlagDescription": "Force overwrite output directory (not supported yet)",
+  "objectsDescription": "List of objects to check (CSV seperated for multiple) (defaults to ALL)",
+  "errorNoOrgResults": "No results found for the organization '%s'."
+}
