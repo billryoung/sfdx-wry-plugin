@@ -1,6 +1,6 @@
 {
   "name": "sfdx-wry-plugin",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "dependencies": {
     "@babel/code-frame": {
       "version": "7.0.0-beta.51"

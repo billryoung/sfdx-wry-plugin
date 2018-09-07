@@ -26,7 +26,7 @@ Account.Customer: 12 records
 Opportunity: 38 records
 User: 5 records
   `,
-`$ sfdx wry:file:replace -u myScratchOrg@example.com -o ALL
+`$ sfdx wry:data:count -u myScratchOrg@example.com -o ALL
 Account: 14 records
 Account.Vendor: 2 records
 Account.Customer: 12 records

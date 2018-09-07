@@ -69,7 +69,7 @@ EXAMPLES
   Opportunity: 38 records
   User: 5 records
   
-  $ sfdx wry:file:replace -u myScratchOrg@example.com -o ALL
+  $ sfdx wry:data:count -u myScratchOrg@example.com -o ALL
   Account: 14 records
   Account.Vendor: 2 records
   Account.Customer: 12 records
@@ -77,7 +77,7 @@ EXAMPLES
   User: 5 records
 ```
 
-_See code: [src/commands/wry/data/count.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.8/src/commands/wry/data/count.ts)_
+_See code: [src/commands/wry/data/count.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.9/src/commands/wry/data/count.ts)_
 
 ## `sfdx wry:file:replace`
 
@@ -119,7 +119,7 @@ EXAMPLES
      QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
 ```
 
-_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.8/src/commands/wry/file/replace.ts)_
+_See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.9/src/commands/wry/file/replace.ts)_
 
 ## `sfdx wry:hello:org [FILE]`
 
@@ -147,7 +147,7 @@ EXAMPLES
      Hello myname! This is org: MyOrg and I will be around until Tue Mar 20 2018!
 ```
 
-_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.8/src/commands/wry/hello/org.ts)_
+_See code: [src/commands/wry/hello/org.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.9/src/commands/wry/hello/org.ts)_
 
 ## `sfdx wry:org:limits`
 
@@ -178,5 +178,5 @@ EXAMPLES
   SingleEmail: 15 of 15
 ```
 
-_See code: [src/commands/wry/org/limits.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.8/src/commands/wry/org/limits.ts)_
+_See code: [src/commands/wry/org/limits.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.9/src/commands/wry/org/limits.ts)_
 <!-- commandsstop -->
