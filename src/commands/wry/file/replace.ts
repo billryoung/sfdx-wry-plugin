@@ -1,4 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
+import {AnyJson} from '@salesforce/ts-types';
 import fs = require('fs');
 
 // Initialize Messages with the current plugin directory
@@ -45,7 +46,7 @@ export default class Replace extends SfdxCommand {
     protected static requiresProject = false;
 
     
-    public async run(): Promise<core.AnyJson> {
+    public async run(): Promise<AnyJson> {
  
         //get command line flags
         const inputdirArg = this.flags.inputdir;
@@ -103,12 +104,6 @@ export default class Replace extends SfdxCommand {
                         if (err) { throw err; }
 
                         let objectType = null;
-                        let ignoreResult1 = data.replace(/"records"[\s\S]*?attributes[\s\S]*?"type"[\s\S]*?"(.*)"/gm, function(x,y) {
-                        //newData = data.replace(/"attributes".?{"type".?:.?"(.?)".?"RecordType"\\: {.?{.?}.?"DeveloperName".?"(.?)"}/gm, function(x,y,z) {
-                            //console.log("objectType:\ty='"+y+"'");
-                            objectType = y;
-                            return y;
-                        });
                         if(null!=objectType) {
                             console.log(oldFilePath+": sObjectType=\""+objectType+"\"");
                         }

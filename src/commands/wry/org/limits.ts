@@ -1,5 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-import fs = require('fs');
+import {AnyJson} from '@salesforce/ts-types';
 
 //import { Connection, ConnectionOptions, RequestInfo } from 'jsforce';
 
@@ -47,7 +47,7 @@ SingleEmail: 15 of 15
     protected static requiresProject = false;
 
     
-    public async run(): Promise<core.AnyJson> {
+    public async run(): Promise<AnyJson> {
 
         const limitsToCheckArg = this.flags.limits || '';
         let limitsToCheck = limitsToCheckArg.split(',');
@@ -57,7 +57,7 @@ SingleEmail: 15 of 15
         const conn = this.org.getConnection();
 
         //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
-        const limitsResultVar = await conn.request('/limits') as LimitsResult;
+        const limitsResultVar = await conn.request('/limits') as unknown as LimitsResult;
 
         //you can drill through the variables, like:
         //this.ux.log("limits="+limitsResultVar.DailyApiRequests.Max);
