@@ -1,5 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-import fs = require('fs');
+import {AnyJson} from '@salesforce/ts-types';
 
 //import { Connection, ConnectionOptions, RequestInfo } from 'jsforce';
 
@@ -49,7 +49,7 @@ User: 5 records
     protected static requiresProject = false;
 
     
-    public async run(): Promise<core.AnyJson> {
+    public async run(): Promise<AnyJson> {
 
         //command line args
         const objectsToCheckArg = this.flags.objects || '';
@@ -77,7 +77,7 @@ User: 5 records
             objectsToCheck = [];
 
             //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
-            const sobjectsResultVar = await conn.request('/sobjects') as sobjectsResult;
+            const sobjectsResultVar = await conn.request('/sobjects') as unknown as sobjectsResult;
 
             const excludeList : string[] = ['CollaborationGroupRecord', 'FeedItem'];
             
