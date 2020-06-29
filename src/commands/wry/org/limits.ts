@@ -1,5 +1,6 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+import { LimitsInfo } from 'jsforce';
 //import { Connection, ConnectionOptions, RequestInfo } from 'jsforce';
 
 
@@ -56,7 +57,7 @@ SingleEmail: 15 of 15
         const conn = this.org.getConnection();
 
         //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
-        const limitsResultVar = await conn.request('/limits') as LimitsResult;
+        const limitsResultVar = await conn.request('/limits') as unknown as LimitsInfo;
 
         //you can drill through the variables, like:
         //this.ux.log("limits="+limitsResultVar.DailyApiRequests.Max);
@@ -77,38 +78,6 @@ SingleEmail: 15 of 15
                 this.ux.log(key+": "+limitsResultVar[key].Remaining+" of "+limitsResultVar[key].Max);
             }
         }
-        
-        //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_limits.htm
-        interface LimitsResult {
-            ConcurrentAsyncGetReportInstances: LimitEntry;
-            ConcurrentSyncReportRuns: LimitEntry;
-            DailyApiRequests: LimitEntry;
-            DailyAsyncApexExecutions: LimitEntry;
-            DailyBulkApiRequests: LimitEntry;
-            DailyDurableGenericStreamingApiEvents: LimitEntry;
-            DailyDurableStreamingApiEvents: LimitEntry;
-            DailyGenericStreamingApiEvents: LimitEntry;
-            DailyStreamingApiEvents: LimitEntry;
-            DailyWorkflowEmails: LimitEntry;
-            DataStorageMB: LimitEntry;
-            DurableStreamingApiConcurrentClients: LimitEntry;
-            FileStorageMB: LimitEntry;
-            HourlyAsyncReportRuns: LimitEntry;
-            HourlyDashboardRefreshes: LimitEntry;
-            HourlyDashboardResults: LimitEntry;
-            HourlyDashboardStatuses: LimitEntry;
-            HourlyODataCallout: LimitEntry;
-            HourlySyncReportRuns: LimitEntry;
-            HourlyTimeBasedWorkflow: LimitEntry;
-            MassEmail: LimitEntry;
-            SingleEmail: LimitEntry;
-            StreamingApiConcurrentClients: LimitEntry;
-        }
-        interface LimitEntry {
-            Max: number;
-            Remaining: number;
-        }
-      
 
         // Return an object to be displayed with --json
         return { 'message': 'TODO' };
