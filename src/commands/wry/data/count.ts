@@ -1,6 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-import fs = require('fs');
-
+import { AnyJson, JsonArray } from '@salesforce/ts-types';
 //import { Connection, ConnectionOptions, RequestInfo } from 'jsforce';
 
 
@@ -49,7 +48,7 @@ User: 5 records
     protected static requiresProject = false;
 
     
-    public async run(): Promise<core.AnyJson> {
+    public async run(): Promise<AnyJson> {
 
         //command line args
         const objectsToCheckArg = this.flags.objects || '';
@@ -170,7 +169,7 @@ User: 5 records
         }
         
         //https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_describeGlobal.htm
-        interface sobjectsResult {
+        interface sobjectsResult extends JsonArray {
             sobjects: Array<sobjectsEntry>;
         }
         interface sobjectsEntry {
