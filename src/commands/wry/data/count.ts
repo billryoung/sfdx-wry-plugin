@@ -1,5 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-
+import { AnyJson } from '@salesforce/ts-types';
 //import { Connection, ConnectionOptions, RequestInfo } from 'jsforce';
 
 
@@ -48,7 +48,7 @@ User: 5 records
     protected static requiresProject = false;
 
     
-    public async run(): Promise<core.AnyJson> {
+    public async run(): Promise<AnyJson> {
 
         //command line args
         const objectsToCheckArg = this.flags.objects || '';

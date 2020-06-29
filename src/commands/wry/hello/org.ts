@@ -1,4 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
+import { AnyJson } from '@salesforce/ts-types';
 
 // Initialize Messages with the current plugin directory
 core.Messages.importMessagesDirectory(__dirname);
@@ -38,7 +39,7 @@ export default class Org extends SfdxCommand {
   // Set this to true if your command requires a project workspace; 'requiresProject' is false by default
   protected static requiresProject = false;
 
-  public async run(): Promise<core.AnyJson> {
+  public async run(): Promise<AnyJson> {
     const name = this.flags.name || 'world';
 
     // this.org is guaranteed because requiresUsername=true, as opposed to supportsUsername

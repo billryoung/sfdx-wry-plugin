@@ -1,4 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
+import { AnyJson } from '@salesforce/ts-types';
 //import { Connection, ConnectionOptions, RequestInfo } from 'jsforce';
 
 
@@ -45,7 +46,7 @@ SingleEmail: 15 of 15
     protected static requiresProject = false;
 
     
-    public async run(): Promise<core.AnyJson> {
+    public async run(): Promise<AnyJson> {
 
         const limitsToCheckArg = this.flags.limits || '';
         let limitsToCheck = limitsToCheckArg.split(',');
