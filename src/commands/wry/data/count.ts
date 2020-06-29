@@ -1,5 +1,4 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
-import fs = require('fs');
 
 //import { Connection, ConnectionOptions, RequestInfo } from 'jsforce';
 
