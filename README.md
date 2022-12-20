@@ -110,6 +110,8 @@ EXAMPLES
      Account.json: Replacing $R{RecordType.Account.Customer} with 0125C000000IGVSQA4
      NewUser.json: Replacing $R{UserRole.CEO} with 00E5C000000UZSmUAO
      QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
+     InternalUsers.json: Replacing $R{UserName.3} with sfdghk4@test.com
+     EmployeeUsers.json: Replacing $R{Profile.Staff} with 00e3R000000Um4lQAC
   
   $ sfdx wry:file:replace -u myScratchOrg@example.com -i data  
      Copying data/* to data.out/*
@@ -117,6 +119,8 @@ EXAMPLES
      Account.json: Replacing $R{RecordType.Account.Customer} with 0125C000000IGVSQA4
      NewUser.json: Replacing $R{UserRole.CEO} with 00E5C000000UZSmUAO
      QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
+     InternalUsers.json: Replacing $R{UserName.3} with sfdghk4@test.com
+     EmployeeUsers.json: Replacing $R{Profile.Staff} with 00e3R000000Um4lQAC
 ```
 
 _See code: [src/commands/wry/file/replace.ts](https://github.com/billryoung/sfdx-wry-plugin/blob/v0.0.9/src/commands/wry/file/replace.ts)_

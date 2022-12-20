@@ -1,4 +1,5 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
+import {AnyJson} from '@salesforce/ts-types';
 import fs = require('fs');
 
 // Initialize Messages with the current plugin directory
@@ -19,13 +20,17 @@ export default class Replace extends SfdxCommand {
   Account.json: Replacing $R{RecordType.Account.Customer} with 0125C000000IGVSQA4
   NewUser.json: Replacing $R{UserRole.CEO} with 00E5C000000UZSmUAO
   QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
+  InternalUsers.json: Replacing $R{UserName.3} with sfdghk4@test.com
+  EmployeeUsers.json: Replacing $R{Profile.Staff} with 00e3R000000Um4lQAC
   `,
 `$ sfdx wry:file:replace -u myScratchOrg@example.com -i data  
   Copying data/* to data.out/*
   Account.json: Replacing $R{RecordType.Account.Vendor} with 0125C000000IGVIQA4
   Account.json: Replacing $R{RecordType.Account.Customer} with 0125C000000IGVSQA4
   NewUser.json: Replacing $R{UserRole.CEO} with 00E5C000000UZSmUAO
-  QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO  
+  QAUser.json: Replacing $R{UserRole.MarketingTeam} with 00E5C000000UZSxUAO
+  InternalUsers.json: Replacing $R{UserName.3} with sfdghk4@test.com
+  EmployeeUsers.json: Replacing $R{Profile.Staff} with 00e3R000000Um4lQAC  
   `
   ];
 
@@ -45,7 +50,7 @@ export default class Replace extends SfdxCommand {
     protected static requiresProject = false;
 
     
-    public async run(): Promise<core.AnyJson> {
+    public async run(): Promise<AnyJson> {
  
         //get command line flags
         const inputdirArg = this.flags.inputdir;
@@ -59,7 +64,7 @@ export default class Replace extends SfdxCommand {
         let replaceMap = new Map<string, string>();
     
         //query record types
-        const recordTypeQuery = 'Select Id, SobjectType, DeveloperName from RecordType where IsActive=true order by SObjectType, DeveloperName';
+        const recordTypeQuery = 'SELECT Id, SobjectType, DeveloperName FROM RecordType WHERE IsActive=true ORDER BY SObjectType, DeveloperName';
         const recordTypeResult = await conn.query<RecordType>(recordTypeQuery);
         for(let entry of recordTypeResult.records) {
             const key = "RecordType."+entry.SobjectType+"."+entry.DeveloperName;
@@ -68,11 +73,27 @@ export default class Replace extends SfdxCommand {
         }
       
         //query Roles
-        const userRoleQuery = 'select Id, DeveloperName from UserRole order by DeveloperName';
+        const userRoleQuery = 'SELECT Id, DeveloperName FROM UserRole ORDER BY DeveloperName';
         const userRoleResult = await conn.query<UserRole>(userRoleQuery);
         for(let entry of userRoleResult.records) {
             const key = "Role."+entry.DeveloperName;  
             replaceMap[key] = entry.Id;
+            //console.log("key='"+key+"'\tvalue="+replaceMap[key]);
+        }
+
+        //query Profiles
+        const profileQuery = 'SELECT Id, Name FROM Profile ORDER BY Name';
+        const profileResult = await conn.query<Profile>(profileQuery);
+        for(let entry of profileResult.records) {
+            const key = "Profile."+entry.Name;  
+            replaceMap[key] = entry.Id;
+            //console.log("key='"+key+"'\tvalue="+replaceMap[key]);
+        }
+
+        //generate Usernames
+        for (let i = 0; i < 100; i++) {
+            const key = "Username."+i;  
+            replaceMap[key] = (Math.random() + 1).toString(36).substring(7)+"@test.com";
             //console.log("key='"+key+"'\tvalue="+replaceMap[key]);
         }
     
@@ -103,8 +124,8 @@ export default class Replace extends SfdxCommand {
                         if (err) { throw err; }
 
                         let objectType = null;
-                        let ignoreResult1 = data.replace(/"records"[\s\S]*?attributes[\s\S]*?"type"[\s\S]*?"(.*)"/gm, function(x,y) {
-                        //newData = data.replace(/"attributes".?{"type".?:.?"(.?)".?"RecordType"\\: {.?{.?}.?"DeveloperName".?"(.?)"}/gm, function(x,y,z) {
+                        data.replace(/"records"[\s\S]*?attributes[\s\S]*?"type"[\s\S]*?"(.*)"/gm, function(x,y) {
+                            //newData = data.replace(/"attributes".?{"type".?:.?"(.?)".?"RecordType"\\: {.?{.?}.?"DeveloperName".?"(.?)"}/gm, function(x,y,z) {
                             //console.log("objectType:\ty='"+y+"'");
                             objectType = y;
                             return y;
@@ -172,6 +193,10 @@ export default class Replace extends SfdxCommand {
             DeveloperName: string;
         }
 
+        interface Profile {
+            Id: string;
+            Name: string;
+        }
 
         // Return an object to be displayed with --json
         return { 'message': 'TODO' };
